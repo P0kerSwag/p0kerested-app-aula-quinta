@@ -1,32 +1,56 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import React,{useState} from 'react';
+import {SafeAreaView,FlatList, StyleSheet,Image, Text, View,Button } from 'react-native';
+import React,{useState,useEffect} from 'react';
 
 export default function App() {
-  const [nome,setNome] = useState('Tomate');
+  const [pokemons,setPokemons] = useState([])
+  useEffect(() =>{
+    fetch('https://pokeapi.co/api/v2/pokemon',{
+        method:'GET',
+        headers: {
+          'Accept': 'application/json',
+        }
+    })
+    .then(response => response.json())
+    .then(data=>{
+      console.log(data)
+      setPokemons(data.results)
+    })
+  },[])
   return (
-    <View style={styles.container}>
-      <Text style={styles.titulo}>{ nome}</Text>
-      <StatusBar style="auto" />
-      <Button title ='trocar sessão'  />
-    </View>
+    <SafeAreaView style={styles.container}>
+       <FlatList 
+          data={pokemons}
+          keyExtractor={(pokemon) => pokemon.name}
+          contentContainerStyle={{flexGrow: 1}}
+          renderItem={PokemonShow}
+       />
+    </SafeAreaView>
   );
+}
+function PokemonShow(item) {
+  const {name,url}  = item.item
+  const pokemonNumber = url.replace('https://pokeapi.co/api/v2/pokemon','')
+  const ImageUrl = 'https://cdn.traction.one/pokedex/pokemon'+pokemonNumber+'.png'
+  return(
+    <View style={{flexDirection:'row'}}>
+      <Image  style={{width:100, height:100}} 
+              source={{uri: ImageUrl.replace('/.png','.png')}}
+      />
+      <Text styles={styles.titulo}>{name}</Text>
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#2BDC5B',
+    backgroundColor: '#00008B',
     alignItems: 'center',
     justifyContent: 'center',
   },
   titulo:{
-    color: 'black',
+    color: 'white',
     fontSize: 20,
     fontWeight: 'bold',
-  },
-  paragrafo:{
-    fontSize: 12,
-    color: '#fff'
   }
 });
