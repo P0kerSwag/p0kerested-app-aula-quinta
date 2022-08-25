@@ -1,5 +1,6 @@
 import {SafeAreaView,FlatList, StyleSheet,Image, Text, View,Button } from 'react-native';
 import React,{useState,useEffect} from 'react';
+import styled from 'styled-components/native';
 
 export default function App() {
   const [pokemons,setPokemons] = useState([])
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
   }
 });
 
-const pokemonEstilo = Style.Sheet.create({
+const pokemonEstilo = StyleSheet.create({
   card: {
     flexDirection: 'column',
     width: '350',
@@ -71,3 +72,8 @@ const pokemonEstilo = Style.Sheet.create({
 
   }
 })
+
+const NomePokemon = styled.Text`
+  color: #fff;
+  font-size: 24px;
+`;
