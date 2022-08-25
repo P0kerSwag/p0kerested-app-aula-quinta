@@ -50,10 +50,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  titulo:{
-    color: 'white',
-    fontSize: 20,
-    fontWeight: 'bold',
+  divider:{
+    height: StyleSheet.hairlineWidth,
+    backgroundColor: "#f2fff",
+    marginHorizontal: 16,
+    marginTop: 16,
+
   }
 });
 
