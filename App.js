@@ -33,6 +33,7 @@ function PokemonShow(item) {
   const ImageUrl = 'https://cdn.traction.one/pokedex/pokemon'+pokemonNumber+'.png'
   return(
     <View style={{flexDirection:'row'}}>
+      <NomePokemon style={styles.studio}>{name}</NomePokemon>
       <Image  style={{width:100, height:100}} 
               source={{uri: ImageUrl.replace('/.png','.png')}}
       />
@@ -54,3 +55,19 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   }
 });
+
+const pokemonEstilo = Style.Sheet.create({
+  card: {
+    flexDirection: 'column',
+    width: '350',
+    height: '350',
+    backgroundColor: '#fff',
+    margin: 25,
+    justifyContent: 'center',
+    alingItems: 'center',
+    borderRadius: 5,
+  },
+  imagem:{
+
+  }
+})
