@@ -1,48 +1,20 @@
 import {SafeAreaView,FlatList, StyleSheet,Image, Text, View,Button } from 'react-native';
 import React,{useState,useEffect} from 'react';
 import styled from 'styled-components/native';
-
+import ListItem from './components/ListItem';
 export default function App() {
-  const [pokemons,setPokemons] = useState([])
-  useEffect(() =>{
-    fetch('https://pokeapi.co/api/v2/pokemon',{
-        method:'GET',
-        headers: {
-          'Accept': 'application/json',
-        }
-    })
-    .then(response => response.json())
-    .then(data=>{
-      console.log(data)
-      setPokemons(data.results)
-    })
-  },[])
   return (
     <SafeAreaView style={styles.container}>
-       <FlatList 
-          data={pokemons}
-          keyExtractor={(pokemon) => pokemon.name}
-          contentContainerStyle={{flexGrow: 1}}
-          renderItem={PokemonShow}
-       />
+      <View style={styles.titleWrapper}>
+        <Text style={styles.text}> Markets</Text>
+      </View>
+      <View style={styles.divider}>
+
+      </View>
+      <ListItem />
     </SafeAreaView>
   );
 }
-function PokemonShow(item) {
-  const {name,url}  = item.item
-  const pokemonNumber = url.replace('https://pokeapi.co/api/v2/pokemon','')
-  const ImageUrl = 'https://cdn.traction.one/pokedex/pokemon'+pokemonNumber+'.png'
-  return(
-    <View style={{flexDirection:'row'}}>
-      <NomePokemon style={styles.studio}>{name}</NomePokemon>
-      <Image  style={{width:100, height:100}} 
-              source={{uri: ImageUrl.replace('/.png','.png')}}
-      />
-      <Text styles={styles.titulo}>{name}</Text>
-    </View>
-  )
-}
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -50,32 +22,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  text:{
+    color: 'white',
+    fontSize: '22px'
+  },
   divider:{
     height: StyleSheet.hairlineWidth,
-    backgroundColor: "#f2fff",
+    backgroundColor: "#fff",
     marginHorizontal: 16,
     marginTop: 16,
-
   }
 });
-
-const pokemonEstilo = StyleSheet.create({
-  card: {
-    flexDirection: 'column',
-    width: '350',
-    height: '350',
-    backgroundColor: '#fff',
-    margin: 25,
-    justifyContent: 'center',
-    alingItems: 'center',
-    borderRadius: 5,
-  },
-  imagem:{
-
-  }
-})
-
-const NomePokemon = styled.Text`
-  color: #fff;
-  font-size: 24px;
-`;
