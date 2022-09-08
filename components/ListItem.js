@@ -1,21 +1,22 @@
 import React from 'react'
-import { View, Text,TouchableOpacity, StyleSheet} from 'react-native'
-
-const ListItem = () => {
+import { View, Text,TouchableOpacity, StyleSheet, Image} from 'react-native'
+import icon from '../imagens/etherium.png'
+const ListItem = ({name, symbol,currentPrice, priceChangePercentage7d,logoUrl}) => {
+    const priceChangeColor = priceChangePercentage7d > 0 ? 'green' : 'red'
     return (
         <TouchableOpacity>
             <View style={styles.itemWrapper}>
                 <View style={styles.leftWrapper}>
-                    <Image source= {{uri: logoUrl}} style={styles.image}/>
+                    <Image source= {{url: logoUrl}} style={styles.image}/>
                 </View>
                 <View style={styles.leftWrapper}>
-                <Text style={styles.title}>Etherium</Text>
-                <Text style={styles.subtitle}>ETH</Text>
+                <Text style={styles.title}>{name}</Text>
+                <Text style={styles.subtitle}>{symbol.toUpperCase()}</Text>
             </View>
         </View>
         <View style={styles.rightWrapper}>
-            <Text style={styles.title}>Etherium</Text>
-            <Text style={[styles.subtitle,{color: 'red'}]}>ETH</Text>
+            <Text style={styles.title}>{currentPrice}</Text>
+            <Text style={[styles.subtitle,{color: 'red'}]}>{priceChangePercentage7d}</Text>
         </View>
     </TouchableOpacity>
         
@@ -37,9 +38,20 @@ const styles = StyleSheet.create({
     rightWrapper:{
         alingItems: 'flex-end'
     },
-    image: {},
-    titlesWrapper: {},
-    title: {},
-    subtitle: {},
+    image: {
+        width:48,
+        height: 48, 
+    },
+    titlesWrapper: {
+        marginLeft:8
+    },
+    title: {
+        fontSize:18
+    },
+    subtitle: {
+        marginTop:4,
+        fontSize:14,
+        color: '#A9ABB1',
+    },
 })
 export default ListItem

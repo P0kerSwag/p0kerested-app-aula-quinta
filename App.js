@@ -2,6 +2,7 @@ import {SafeAreaView,FlatList, StyleSheet,Image, Text, View,Button } from 'react
 import React,{useState,useEffect} from 'react';
 import styled from 'styled-components/native';
 import ListItem from './components/ListItem';
+import { SAMPLE_DATA } from './assets/data/sampleData';
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
